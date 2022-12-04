@@ -1,0 +1,34 @@
+.aside{
+    flex: content;
+    background: #191818;
+    color: #999;
+}
+
+.menu{
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    font-size: 1.25rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.menuItem{
+    display: flex;
+}
+
+.menuItem a{
+    color: #999;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+}
+
+.menuItem a:hover{
+    color: #fff;
+    cursor: pointer;
+    background-color: #1f8dd6;
+    transition: all 0.2s ease-in-out;
+}
