@@ -1,0 +1,23 @@
+.home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.title{
+    font-size: 3rem;
+    padding: 2rem;
+}
+
+.subTitle{
+    font-size: 2rem;
+    padding: 2rem;
+}
+
+.text{
+    max-width: 50%;
+    padding: 1rem;
+}

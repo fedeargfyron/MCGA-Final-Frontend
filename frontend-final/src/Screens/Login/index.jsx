@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './login.module.css'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
@@ -7,9 +7,10 @@ import Input from '../../Components/Shared/Input'
 import Button from '../../Components/Shared/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../Store/users/thunks'
-
+import InformationModal from '../../Components/Shared/InformationModal'
 
 const Login = () => {
+    const [open, setOpen] = useState(false);
     let userStorage = localStorage.getItem("user");
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { isLoading, isError, data } = useSelector((state) => state.user);
@@ -20,7 +21,6 @@ const Login = () => {
         if(userStorage)
             return navigate('/');
     }, [userStorage, navigate])
-    
 
     const onSubmit = (e) => {
         let body = {
@@ -29,17 +29,29 @@ const Login = () => {
         };
 
         dispatch(getUsers(body));
+
+        if(isError){
+            setOpen(true);
+        }
+
         if(!isLoading && !isError && data){
             localStorage.setItem("user", JSON.stringify(data.data));
             let path = `/`
             navigate(path);
         }
     }
-
     return (
         <div className={styles.login}>
-            <h2>Login</h2>
+            { isError && 
+            <InformationModal
+                Message={data.Message}
+                Title='Error in login!'
+                open={open}
+                setOpen={setOpen}
+            />}
+            
             <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                <h2 className={styles.title}>Login</h2>
                 <InputContainer label={'Email'}>
                     <Input
                         register={register}
