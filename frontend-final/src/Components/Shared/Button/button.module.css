@@ -1,0 +1,18 @@
+.button{
+    border-radius: 4px;   
+    padding: .5rem .5rem;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.button svg{
+    margin-right: .25rem;
+}
+
+.button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+}

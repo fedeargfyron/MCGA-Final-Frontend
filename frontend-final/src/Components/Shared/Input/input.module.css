@@ -1,0 +1,11 @@
+.input{
+    padding: .25rem;
+    font-size: 1.25rem;
+    margin: 0;
+}
+
+.errorLabel{
+    margin: 0;
+    text-align: left;
+    color: #F44336;
+}
