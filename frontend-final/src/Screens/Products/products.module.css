@@ -51,3 +51,8 @@
 .tableRow:nth-child(even){
     background-color: #ededed;
 }
+
+.errorMessage{
+    font-size: 2rem;
+    padding: 2rem;
+}

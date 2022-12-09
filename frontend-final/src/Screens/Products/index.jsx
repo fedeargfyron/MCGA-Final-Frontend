@@ -49,6 +49,8 @@ const Products = () => {
 
     if (isLoading) return <h2><CircularProgress /></h2>
 
+    if(isError) return <h2 className={styles.errorMessage}>Error getting products</h2>
+
     return (
         <div className={styles.tableContainer}>
             { openModal && 

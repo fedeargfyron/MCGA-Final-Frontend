@@ -5,6 +5,7 @@ import SidebarLayout from './Components/SidebarLayout';
 import Home from './Screens/Home';
 import Login from './Screens/Login';
 import Products from './Screens/Products';
+import ProductForm from './Screens/ProductForm';
 
 function App() {
   return (
@@ -19,6 +20,23 @@ function App() {
                 <Products />
               </RouteGuard>
             }
+          />
+
+          <Route 
+            path="/products/form" 
+            element= {
+                <RouteGuard>
+                  <ProductForm />
+                </RouteGuard>
+            } 
+          />
+          <Route 
+            path="/products/form/:id" 
+            element= {
+                <RouteGuard>
+                  <ProductForm />
+                </RouteGuard>
+            } 
           />
         </Route>
         
