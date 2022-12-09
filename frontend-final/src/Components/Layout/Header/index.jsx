@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logOutUser } from '../../../Store/users/actions';
 import Button from '../../Shared/Button';
 import styles from './header.module.css'
@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <header className={styles.header}>
         <div>
-            <h1 className={styles.title}>Arrón Final</h1>
+            <Link to={'/'} className={styles.headerTitle}><h1>Arrón Final</h1></Link>
         </div>
         { user ? <Button
           onClick={logOut}

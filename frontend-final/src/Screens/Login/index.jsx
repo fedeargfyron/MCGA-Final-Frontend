@@ -27,19 +27,18 @@ const Login = () => {
             "email": e.email,
             "pass": e.password
         };
-
+        
         dispatch(getUsers(body));
-
+        
         if(isError){
             setOpen(true);
         }
 
-        if(!isLoading && !isError && data){
-            localStorage.setItem("user", JSON.stringify(data.data));
-            let path = `/`
-            navigate(path);
+        if(!isLoading && !isError && localStorage.getItem('user')){
+            navigate('/');
         }
     }
+    
     return (
         <div className={styles.login}>
             { isError && 

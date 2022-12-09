@@ -11,3 +11,8 @@
     font-size: 1.25rem !important;
     padding: 1.25rem !important;
 }
+
+.headerTitle{
+    text-decoration: none;
+    color: white;
+}
