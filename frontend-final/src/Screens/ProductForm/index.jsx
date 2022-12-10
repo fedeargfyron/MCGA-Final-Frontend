@@ -37,34 +37,13 @@ const ProductForm = () => {
 
     let navigate = useNavigate();
 
-    const onSubmit = (e) => {
-        let body = {
-            "name": e.name,
-            "description": e.description,
-            "price": e.price,
-            "stock": e.stock,
-            "category": e.category
-        };
-
-        if(editForm){
-            dispatch(updateProduct(id, body));
-            setDispatchPutFlag(true);
-        }
-        else{
-            dispatch(postProduct(body));
-            setDispatchPostFlag(true);
-        }
-        
-    }
+    useEffect(() => {
+        if (id) dispatch(getProductById(id));
+    }, [id, dispatch]);
 
     useEffect(() => {
-        if(!dispatchPostFlag){
-            return;
-        }
+        if(!dispatchPostFlag || postIsLoading) return;
 
-        if(postIsLoading)
-            return;
-        
         if(postIserror){
             setOpenModal(true);
             setModalMessage(postData.Message);
@@ -72,23 +51,13 @@ const ProductForm = () => {
             return;
         }
 
-        if(postData){
-            navigate('/products');
-        }
+        if(postData) navigate('/products');
          
     }, [postIsLoading, postIserror, postData, dispatchPostFlag, navigate]);
 
     useEffect(() => {
-        if(!dispatchPutFlag){
-            return;
-        }
-
-        console.log(putIsLoading, putIserror, putData)
-
-        if(putIsLoading)
-            return;
+        if(!dispatchPutFlag || putIsLoading) return;
         
-        console.log(putIsLoading, putIserror, putData)
         if(putIserror){
             setOpenModal(true);
             setModalMessage(putData.Message);
@@ -96,21 +65,12 @@ const ProductForm = () => {
             return;
         }
 
-        if(putData){
-            navigate('/products');
-        }
+        if(putData) navigate('/products');
          
     }, [putIsLoading, putIserror, putData, dispatchPutFlag, navigate]);
 
-
     useEffect(() => {
-        if (id) dispatch(getProductById(id));
-    }, [id, dispatch]);
-
-    useEffect(() => {
-        if(!id) return;
-
-        if(getByIdIsLoading) return;
+        if(!id || getByIdIsLoading) return;
         
         if(getByIdIserror){
             setOpenModal(true);
@@ -129,7 +89,27 @@ const ProductForm = () => {
         setValue("price", product.price);
         setValue("stock", product.stock);
         setValue("category", product.category);
-      }, [id, product, setValue, getByIdIsLoading, getByIdIserror]);
+    }, [id, product, setValue, getByIdIsLoading, getByIdIserror]);
+
+    const onSubmit = (e) => {
+        let body = {
+            "name": e.name,
+            "description": e.description,
+            "price": e.price,
+            "stock": e.stock,
+            "category": e.category
+        };
+
+        if(editForm){
+            dispatch(updateProduct(id, body));
+            setDispatchPutFlag(true);
+        }
+        else{
+            dispatch(postProduct(body));
+            setDispatchPostFlag(true);
+        }
+    }
+
 
     if(id && getByIdIsLoading) return <h2>Loading....</h2>;
 
