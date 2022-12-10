@@ -2,7 +2,7 @@ import { Modal, Box } from '@mui/material'
 import React from 'react'
 import styles from './modal.module.css'
 
-const InformationModal = ({Message, Title, open, setOpen, children}) => {
+const InformationModal = ({Message, Title, open, setOpen, titleColor, children}) => {
     const handleClose = () => setOpen(false);
 
     const style = {
@@ -26,7 +26,7 @@ const InformationModal = ({Message, Title, open, setOpen, children}) => {
             aria-describedby="parent-modal-description"
         >
             <Box className={styles.box} sx={{ ...style, width: 400 }}>
-                <h2 className={styles.modalTitle} id="parent-modal-title">{Title}</h2>
+                <h2 style={{color: titleColor }} className={styles.modalTitle} id="parent-modal-title">{Title}</h2>
                 <p className={styles.modalMessage} id="parent-modal-description">
                     {Message}
                 </p>

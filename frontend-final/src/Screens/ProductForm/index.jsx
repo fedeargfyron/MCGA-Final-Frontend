@@ -9,14 +9,34 @@ import Button from '../../Components/Shared/Button'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAdd, faCancel } from '@fortawesome/free-solid-svg-icons'
 import { getProductById, postProduct, updateProduct } from '../../Store/products/thunks'
+import InformationModal from '../../Components/Shared/InformationModal'
 const ProductForm = () => {
-    const [formTitle, setFormTitle] = useState("Add product");
+    const [openModal, setOpenModal] = useState(false);
+    const [modalMessage, setModalMessage] = useState('');
+    const [formTitle, setFormTitle] = useState('Add product');
     const [editForm, setEditForm] = useState(false);
+    const [titleColor, setTitleColor] = useState('#F44336');
+    const [dispatchPostFlag, setDispatchPostFlag] = useState(false);
+    const [dispatchPutFlag, setDispatchPutFlag] = useState(false);
     const params = useParams();
     const dispatch = useDispatch();
-    const { getByIdIsLoading, product, getByIdIserror } = useSelector((state) => state.products);
+    
+    const { 
+        getByIdIsLoading, 
+        product, 
+        getByIdIserror, 
+        postIsLoading,
+        postIserror, 
+        postData,
+        putIsLoading, 
+        putIserror,
+        putData
+      } = useSelector((state) => state.products);
     const id = params.id;
     const { register, setValue, handleSubmit, formState: { errors } } = useForm();
+
+    let navigate = useNavigate();
+
     const onSubmit = (e) => {
         let body = {
             "name": e.name,
@@ -26,23 +46,82 @@ const ProductForm = () => {
             "category": e.category
         };
 
-        if(editForm)
+        if(editForm){
             dispatch(updateProduct(id, body));
-        else
-            dispatch(postProduct(body));
-
-        if(!getByIdIsLoading && !getByIdIserror){
-            returnProducts();
+            setDispatchPutFlag(true);
         }
+        else{
+            dispatch(postProduct(body));
+            setDispatchPostFlag(true);
+        }
+        
     }
+
+    useEffect(() => {
+        if(!dispatchPostFlag){
+            return;
+        }
+
+        if(postIsLoading)
+            return;
+        
+        if(postIserror){
+            setOpenModal(true);
+            setModalMessage(postData.Message);
+            setTitleColor('#F44336');
+            return;
+        }
+
+        if(postData){
+            navigate('/products');
+        }
+         
+    }, [postIsLoading, postIserror, postData, dispatchPostFlag, navigate]);
+
+    useEffect(() => {
+        if(!dispatchPutFlag){
+            return;
+        }
+
+        console.log(putIsLoading, putIserror, putData)
+
+        if(putIsLoading)
+            return;
+        
+        console.log(putIsLoading, putIserror, putData)
+        if(putIserror){
+            setOpenModal(true);
+            setModalMessage(putData.Message);
+            setTitleColor('#F44336');
+            return;
+        }
+
+        if(putData){
+            navigate('/products');
+        }
+         
+    }, [putIsLoading, putIserror, putData, dispatchPutFlag, navigate]);
+
 
     useEffect(() => {
         if (id) dispatch(getProductById(id));
     }, [id, dispatch]);
 
     useEffect(() => {
-        if(!product || !id) return;
+        if(!id) return;
 
+        if(getByIdIsLoading) return;
+        
+        if(getByIdIserror){
+            setOpenModal(true);
+            setModalMessage(product.Message);
+            setTitleColor('#F44336');
+            return;
+        }
+
+        if(!product) return;
+
+        setOpenModal(false);
         setEditForm(true);
         setFormTitle("Edit product");
         setValue("name", product.name);
@@ -50,19 +129,21 @@ const ProductForm = () => {
         setValue("price", product.price);
         setValue("stock", product.stock);
         setValue("category", product.category);
-      }, [id, product, setValue]);
-    
-    let navigate = useNavigate();
-    const returnProducts = () => {
-        let path = `/products`
-        navigate(path);
-    }
+      }, [id, product, setValue, getByIdIsLoading, getByIdIserror]);
 
-
-    if(getByIdIsLoading) return <h3>Loading....</h3>;
+    if(id && getByIdIsLoading) return <h2>Loading....</h2>;
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+            { openModal && 
+            <InformationModal 
+                Title={formTitle}
+                Message={modalMessage}
+                open={openModal}
+                setOpen={setOpenModal}
+                titleColor={titleColor}
+            />
+            }
             <h2 className={styles.formTitle}>{formTitle}</h2>
             <InputContainer label={'Name'} errors={errors.name}>
                 <Input
@@ -114,7 +195,7 @@ const ProductForm = () => {
                 icon={<FontAwesomeIcon icon={faAdd}/>} 
                 />
                 <Button
-                onClick={returnProducts}
+                onClick={() => navigate('/products')}
                 content='Cancel' 
                 background={'#F44336'} 
                 type='button'

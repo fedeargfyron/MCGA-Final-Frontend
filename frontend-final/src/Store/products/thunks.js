@@ -62,7 +62,6 @@ export const getProductById = (id) => async (dispatch) => {
     dispatch(getProductByIdLoading());
     try {
         let data = JSON.parse(localStorage.getItem('user'));
-        
         const response = await fetch(`http://localhost:3001/products/byId/${id}`,{
             headers:{
                 'Authorization': data.token
@@ -96,7 +95,7 @@ export const postProduct = (body) => async (dispatch) => {
             body: JSON.stringify(body)
         });
         const json = await response.json();
-        if(response.status !== 201 ) 
+        if(response.status !== 200) 
             return dispatch(postProductError(json));
 
         dispatch(postProductSuccess(json));
@@ -122,7 +121,7 @@ export const updateProduct = (id, body) => async (dispatch) => {
             body: JSON.stringify(body)
         });
         const json = await response.json();
-        if(response.status !== 201 )
+        if(response.status !== 200)
             return putProductError(json);
 
         dispatch(putProductSuccess(json));
