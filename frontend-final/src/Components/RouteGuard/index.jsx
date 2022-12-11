@@ -6,12 +6,15 @@ const RouteGuard = ({ children }) => {
  
    const  hasJWT = () => {
         
-        let token = localStorage.getItem("user");
+        let token = JSON.parse(localStorage.getItem("user"));
 
         if(!token)
             return false;
-        
-        //Validar expiration
+
+        if (Date.now() >= token.expirationAt * 1000) {
+            localStorage.removeItem('user');
+            return false;
+        }
         return true;
    }
 
