@@ -20,7 +20,7 @@ export const getAllProducts = () => async (dispatch) => {
     dispatch(getProductsLoading());
 
     try {
-        const response = await fetch('http://localhost:3001/products');
+        const response = await fetch('https://mcga-final-backend-v2f-m5xtgxipz-fedeargfyron.vercel.app/products');
         const json = await response.json();
         if (response.status !== 200) 
             return dispatch(getProductsError(json));
@@ -39,7 +39,7 @@ export const deleteProduct = (id) => async (dispatch) => {
     try {
         let data = JSON.parse(localStorage.getItem('user'));
         
-        const response = await fetch(`http://localhost:3001/products/${id}`, 
+        const response = await fetch(`https://mcga-final-backend-v2f-m5xtgxipz-fedeargfyron.vercel.app/products/${id}`, 
         {
             method: 'DELETE',
             headers: {'Authorization': data.token}
@@ -50,6 +50,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 
         
         dispatch(deleteProductSuccess(json));
+        dispatch(getAllProducts())
     } catch (error) {
         dispatch(deleteProductError({
             Success: false,
@@ -62,7 +63,7 @@ export const getProductById = (id) => async (dispatch) => {
     dispatch(getProductByIdLoading());
     try {
         let data = JSON.parse(localStorage.getItem('user'));
-        const response = await fetch(`http://localhost:3001/products/byId/${id}`,{
+        const response = await fetch(`https://mcga-final-backend-v2f-m5xtgxipz-fedeargfyron.vercel.app/products/byId/${id}`,{
             headers:{
                 'Authorization': data.token
             }
@@ -85,7 +86,7 @@ export const postProduct = (body) => async (dispatch) => {
     try {
         let data = JSON.parse(localStorage.getItem('user'));
 
-        const response = await fetch('http://localhost:3001/products', { 
+        const response = await fetch('https://mcga-final-backend-v2f-m5xtgxipz-fedeargfyron.vercel.app/products', { 
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
@@ -111,7 +112,7 @@ export const updateProduct = (id, body) => async (dispatch) => {
     dispatch(putProductLoading());
     try {
         let data = JSON.parse(localStorage.getItem('user'));
-        const response = await fetch(`http://localhost:3001/products/${id}`, { 
+        const response = await fetch(`https://mcga-final-backend-v2f-m5xtgxipz-fedeargfyron.vercel.app/products/${id}`, { 
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

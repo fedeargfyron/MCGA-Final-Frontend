@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import InformationModal from '../../Components/Shared/InformationModal';
 import { CircularProgress } from '@mui/material';
 const Products = () => {
+    const [dispatchFlag, setDispatchFlag] = useState(false)
     const [modalMessage, setModalMessage] = useState('');
     const [productId, setProductId] = useState(null)
     const [openModal, setOpenModal] = useState(false);
@@ -33,11 +34,10 @@ const Products = () => {
     }
 
     useEffect(() => {
-        if(deleteIsLoading === true)
+        if(!dispatchFlag || deleteIsLoading)
             return;
-        
-        if(deleteIsError === false)
-            return setOpenModal(false);
+
+        if(deleteIsError === false) return setOpenModal(false);
 
         setModalMessage(deleteData.Message);
         setOpenModal(true);
@@ -45,6 +45,7 @@ const Products = () => {
 
     const confirmDelete = () => {
         dispatch(deleteProduct(productId));
+        setDispatchFlag(true);
     }
 
     if (isLoading) return <h2><CircularProgress /></h2>

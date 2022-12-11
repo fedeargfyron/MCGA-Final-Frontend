@@ -7,7 +7,7 @@ import {
 export const getUsers = (data) => async (dispatch) => {
     dispatch(getUserLoading());
     try {
-        const response = await fetch('http://localhost:3001/users/login', {
+        const response = await fetch('https://mcga-final-backend-v2f-m5xtgxipz-fedeargfyron.vercel.app/users/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
