@@ -20,6 +20,9 @@ export const getUsers = (data) => async (dispatch) => {
         dispatch(getUser(json));
         localStorage.setItem("user", JSON.stringify(json.data));
     } catch (error) {
-        dispatch(getUserError(error));
+        dispatch(getUserError({
+            Success: false,
+            Message: error.message
+        }));
     }
 }

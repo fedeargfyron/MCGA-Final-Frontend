@@ -8,8 +8,10 @@ import Button from '../../Components/Shared/Button'
 import { useDispatch, useSelector } from 'react-redux'
 import { getUsers } from '../../Store/users/thunks'
 import InformationModal from '../../Components/Shared/InformationModal'
+import { CircularProgress } from '@mui/material'
 
 const Login = () => {
+    const [dispatchFlag, setDispatchFlag] = useState(false);
     const [open, setOpen] = useState(false);
     let userStorage = localStorage.getItem("user");
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -22,6 +24,15 @@ const Login = () => {
             return navigate('/');
     }, [userStorage, navigate])
 
+
+    useEffect(() => {
+        if(!dispatchFlag || isLoading)
+            return;
+
+        if(isError)
+        setOpen(true);
+    }, [isLoading, isError, dispatchFlag]);
+
     const onSubmit = (e) => {
         let body = {
             "email": e.email,
@@ -29,10 +40,8 @@ const Login = () => {
         };
         
         dispatch(getUsers(body));
-        
-        if(isError){
-            setOpen(true);
-        }
+
+        setDispatchFlag(true);
 
         if(!isLoading && !isError && localStorage.getItem('user')){
             navigate('/');
@@ -41,6 +50,11 @@ const Login = () => {
     
     return (
         <div className={styles.login}>
+            { isLoading && 
+            <InformationModal
+                Message={ <CircularProgress /> }
+                open={true}
+            />}
             { isError && 
             <InformationModal
                 Message={data.Message}

@@ -3,7 +3,7 @@ import React from 'react'
 import styles from './modal.module.css'
 
 const InformationModal = ({Message, Title, open, setOpen, titleColor, children}) => {
-    const handleClose = () => setOpen(false);
+    const handleClose = () => setOpen && setOpen(false);
 
     const style = {
         position: 'absolute',

@@ -41,7 +41,7 @@ const Products = () => {
 
         setModalMessage(deleteData.Message);
         setOpenModal(true);
-    }, [deleteIsLoading, deleteIsError, deleteData]);
+    }, [deleteIsLoading, deleteIsError, deleteData, dispatchFlag]);
 
     const confirmDelete = () => {
         dispatch(deleteProduct(productId));
