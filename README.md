@@ -1,70 +1,60 @@
-# Getting Started with Create React App
+# Arron Final Frontend
+> Aplicación web
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicación web desarrollada utilizando principalmente React y Redux, además de distintas librerias que facilitaron el desarrollo o las visuales del aplicativo.
 
-## Available Scripts
+## Instalación y uso
 
-In the project directory, you can run:
+Para descargar los paquetes necesarios del aplicativo: 
 
-### `npm start`
+```sh
+npm install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Inicialización:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+npm start
+```
 
-### `npm test`
+## Pantallas
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* Home
+    * Pantalla inicial del aplicativo sin mucha información y obteniendo los primeros 3 productos generados en la base de datos
+    para mostrarlos en cards.
+    * No requiere estar logueado.
 
-### `npm run build`
+* Login
+    * Pantalla que permite a los usuarios iniciar sesión dentro del aplicativo y tener acceso a distintas pantallas.
+    * No requiere estar logueado.
+    * Será redireccionado en caso de estar logueado.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* Products
+    * Pantalla que permite a los usuarios obtener un listado de los productos creados, dando la posibilidad de eliminarlos y
+    redireccionar al formulario de creación o edición de productos.
+    * Requiere estar logueado.
+    * Será redireccionado en caso de no estar logueado.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+* ProductsForm
+    * Pantalla que permite a los usuarios crear o editar productos existentes. 
+    * Contiene verificaciones y manejo de errores por casilla.
+    * Requiere estar logueado.
+    * Será redireccionado en caso de no estar logueado.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Repositorio
 
-### `npm run eject`
+https://github.com/fedeargfyron/MCGA-Final-Frontend
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Produccion
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+https://mcga-final-frontend.vercel.app
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Tecnologias
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* JavaScript
+* ES6
+* React Js
+* Redux - React Redux - Redux thunk
+* React Hook Form
+* Fonts awesome
+* Material UI
