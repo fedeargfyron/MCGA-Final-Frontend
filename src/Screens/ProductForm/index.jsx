@@ -125,46 +125,51 @@ const ProductForm = () => {
             />
             }
             <h2 className={styles.formTitle}>{formTitle}</h2>
-            <InputContainer label={'Name'} errors={errors.name}>
+            <InputContainer label={'Name'}>
                 <Input
                     register={register}
                     inputName={'name'}
-                    requiredTags={{ required: true, maxLength: 20, minLength: 5, pattern: /(^$)|[a-zA-Z0-9]/ }}
+                    requiredTags={{ required: true, maxLength: 20, minLength: 3, pattern: /(^$)|[a-zA-Z0-9]/ }}
                     placeholder={'Name'}
+                    errors={errors.name}
                 />
             </InputContainer>
-            <InputContainer label={'Description'} errors={errors.description}>
+            <InputContainer label={'Description'}>
                 <Input
                     register={register}
                     inputName={'description'}
-                    requiredTags={{ required: true, maxLength: 50, pattern: /(^$)|[a-zA-Z0-9]/ }}
+                    requiredTags={{ required: true }}
                     placeholder={'Description'}
+                    errors={errors.description}
                 />
             </InputContainer>
-            <InputContainer label={'Price'} errors={errors.price}>
+            <InputContainer label={'Price'}>
                 <Input
                     register={register}
                     inputName={'price'}
                     type="number"
                     requiredTags={{ required: true, min: 1 }}
                     placeholder={'Price'}
+                    errors={errors.price}
                 />
             </InputContainer>
-            <InputContainer label={'Stock'} errors={errors.stock}>
+            <InputContainer label={'Stock'}>
                 <Input
                     register={register}
                     inputName={'stock'}
                     type="number"
                     requiredTags={{ required: true, min: 1 }}
                     placeholder={'Stock'}
+                    errors={errors.stock}
                 />
             </InputContainer>
-            <InputContainer label={'Category'} errors={errors.category}>
+            <InputContainer label={'Category'}>
                 <Input
                     register={register}
                     inputName={'category'}
                     requiredTags={{ required: true, maxLength: 50, pattern: /(^$)|[a-zA-Z0-9]/ }}
                     placeholder={'Category'}
+                    errors={errors.category}
                 />
             </InputContainer>
             <div className={styles.buttonContainer}>
